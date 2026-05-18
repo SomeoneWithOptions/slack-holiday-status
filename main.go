@@ -13,7 +13,7 @@ import (
 
 const (
 	diafestivoURL = "https://api.diafestivo.co/next"
-	statusEmoji   = ":palm_tree:"
+	statusEmoji   = ":flag-co:"
 	statusTextFmt = "Colombia Holiday: %s"
 	tzName        = "America/Bogota"
 	httpTimeout   = 10 * time.Second

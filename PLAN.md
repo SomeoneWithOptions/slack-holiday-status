@@ -26,7 +26,7 @@ Slack app installed to your own workspace is required.
 |---|----------|
 | 1  | Cloud Run **Job** (not Service) triggered by Cloud Scheduler via Jobs API |
 | 2  | New Slack app, user token passed as plain `--set-env-vars SLACK_USER_TOKEN=…` |
-| 3  | Status: emoji `:palm_tree:`, text `Colombia Holiday: {name}` |
+| 3  | Status: emoji `:flag-co:`, text `Colombia Holiday: {name}` |
 | 4  | `status_expiration` = end-of-day in `America/Bogota` (23:59:59 local) |
 | 5  | DND `num_minutes` = minutes from now until end-of-day Bogota |
 | 6  | Schedule: `0 2 * * *` in `America/Bogota`, daily Mon–Sun |
@@ -65,7 +65,7 @@ slack-holiday-status/
 ```go
 const (
     diafestivoURL = "https://api.diafestivo.co/next"
-    statusEmoji   = ":palm_tree:"
+    statusEmoji   = ":flag-co:"
     statusTextFmt = "Colombia Holiday: %s"
     tzName        = "America/Bogota"
     httpTimeout   = 10 * time.Second

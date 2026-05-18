@@ -12,7 +12,7 @@ notifications (DND) until end of day.
    that returns the next Colombian public holiday and whether it falls today.
 2. If **not** a holiday: logs and exits 0, touching nothing in Slack.
 3. If **today is a holiday**:
-   - Sets your Slack custom status to `🌴 Colombia Holiday: {name}`, expiring
+   - Sets your Slack custom status to `🇨🇴 Colombia Holiday: {name}`, expiring
      at 23:59:59 `America/Bogota`.
    - Enables DND (snooze) for the remaining minutes of the day.
 4. Structured JSON logs are emitted to stdout and collected by Cloud Logging.
@@ -206,7 +206,7 @@ dry-run mode.
 | Name | Where | Description |
 |---|---|---|
 | `SLACK_USER_TOKEN` | Cloud Run Job env var / `.env` | Slack user token (`xoxp-…`) |
-| `statusEmoji` | `main.go` constant | Emoji shown in status (`:palm_tree:`) |
+| `statusEmoji` | `main.go` constant | Emoji shown in status (`:flag-co:`) |
 | `statusTextFmt` | `main.go` constant | Status text template |
 | `diafestivoURL` | `main.go` constant | Holiday API endpoint |
 | `httpTimeout` | `main.go` constant | Per-request HTTP timeout (10 s) |
