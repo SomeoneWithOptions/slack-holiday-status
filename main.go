@@ -67,6 +67,19 @@ func run() error {
 	httpClient := &http.Client{Timeout: httpTimeout}
 	api := slack.New(token, slack.OptionHTTPClient(httpClient))
 
+	// 5.5. Bail out if a status is already manually set (e.g. PTO)
+	profile, err := api.GetUserProfile(&slack.GetUserProfileParameters{})
+	if err != nil {
+		return fmt.Errorf("get slack profile: %w", err)
+	}
+	if profile.StatusEmoji != "" || profile.StatusText != "" {
+		slog.Info("status already set, skipping holiday status",
+			"current_emoji", profile.StatusEmoji,
+			"current_text", profile.StatusText,
+		)
+		return nil
+	}
+
 	// 6. Set custom status
 	statusText := fmt.Sprintf(statusTextFmt, h.Name)
 	if err := api.SetUserCustomStatus(statusText, statusEmoji, endOfDay.Unix()); err != nil {
