@@ -29,7 +29,7 @@ slack-holiday-status/
 ├── main.go              # entire program (~90 LOC)
 ├── go.mod
 ├── go.sum
-├── Dockerfile           # multi-stage: golang:1.24-alpine → distroless/static:nonroot
+├── Dockerfile           # multi-stage: golang:1.26.3-alpine → distroless/static:nonroot
 ├── .dockerignore
 ├── .gitignore
 ├── build-and-push.sh    # local Docker build + Artifact Registry push + job update
@@ -81,7 +81,7 @@ curl -X POST https://slack.com/api/auth.test \
 
 ## Prerequisites (local machine)
 
-- Go 1.24+
+- Go 1.26.3+
 - Docker with `buildx` (Docker Desktop or OrbStack)
 - `gcloud` CLI authenticated to your GCP project
 

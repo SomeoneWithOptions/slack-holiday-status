@@ -1,6 +1,6 @@
 module github.com/acastellanos/slack-holiday-status
 
-go 1.24
+go 1.26.3
 
 require github.com/slack-go/slack v0.15.0
 
