@@ -1,0 +1,2 @@
+I would like to have an automation, it can be a cloud run service called on daily, to check if the current day is a holiday in colombia using the api api.diafestivo.co, and if it is a holiday, change my status icon and text on slack, also pause notifications for that day.
+it should be written in go, the latest version allowed on gcp cloud run. with minimal dependencies, best practices and idiomatic go 
