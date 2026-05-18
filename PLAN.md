@@ -29,7 +29,7 @@ Slack app installed to your own workspace is required.
 | 3  | Status: emoji `:palm_tree:`, text `Colombia Holiday: {name}` |
 | 4  | `status_expiration` = end-of-day in `America/Bogota` (23:59:59 local) |
 | 5  | DND `num_minutes` = minutes from now until end-of-day Bogota |
-| 6  | Schedule: `0 6 * * *` in `America/Bogota`, daily Mon–Sun |
+| 6  | Schedule: `0 2 * * *` in `America/Bogota`, daily Mon–Sun |
 | 7  | Non-holiday → exit 0 silently, touch nothing in Slack |
 | 8  | Fail-fast on errors, exit non-zero; Cloud Run Job `--max-retries=3`; per-request 10s HTTP timeout |
 | 9  | Deps: stdlib + `github.com/slack-go/slack` |
@@ -405,10 +405,10 @@ gcloud run jobs add-iam-policy-binding slack-holiday-status \
   --member=serviceAccount:$SA \
   --role=roles/run.invoker
 
-# ---- 5. Cloud Scheduler — 06:00 Bogota daily ----
+# ---- 5. Cloud Scheduler — 02:00 Bogota daily ----
 gcloud scheduler jobs create http slack-holiday-status-daily \
   --location=$REGION \
-  --schedule="0 6 * * *" \
+  --schedule="0 2 * * *" \
   --time-zone="America/Bogota" \
   --uri="https://$REGION-run.googleapis.com/apis/run.googleapis.com/v1/namespaces/$PROJECT/jobs/slack-holiday-status:run" \
   --http-method=POST \

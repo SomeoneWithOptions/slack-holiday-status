@@ -1,0 +1,7 @@
+.git
+*.md
+PLAN.md
+.env
+.gitignore
+requirements.txt
+build-and-push.sh
