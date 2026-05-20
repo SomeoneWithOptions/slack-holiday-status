@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"os"
 	"time"
+	_ "time/tzdata"
 
 	"github.com/slack-go/slack"
 )
@@ -52,7 +53,8 @@ func run() error {
 	endOfDay := time.Date(now.Year(), now.Month(), now.Day(), 23, 59, 59, 0, loc)
 
 	// 4. Check if today is a Colombian holiday
-	h, err := fetchHoliday()
+	httpClient := &http.Client{Timeout: httpTimeout}
+	h, err := fetchHoliday(httpClient)
 	if err != nil {
 		return fmt.Errorf("fetch holiday: %w", err)
 	}
@@ -64,7 +66,6 @@ func run() error {
 	slog.Info("holiday detected", "holiday", h.Name, "date", h.Date)
 
 	// 5. Build Slack client
-	httpClient := &http.Client{Timeout: httpTimeout}
 	api := slack.New(token, slack.OptionHTTPClient(httpClient))
 
 	// 5.5. Bail out if a status is already manually set (e.g. PTO)
@@ -101,8 +102,7 @@ func run() error {
 	return nil
 }
 
-func fetchHoliday() (*nextHoliday, error) {
-	client := &http.Client{Timeout: httpTimeout}
+func fetchHoliday(client *http.Client) (*nextHoliday, error) {
 	resp, err := client.Get(diafestivoURL)
 	if err != nil {
 		return nil, fmt.Errorf("GET %s: %w", diafestivoURL, err)
